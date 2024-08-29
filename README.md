@@ -1,1 +1,37 @@
 # Omada_exporter
+##### version: 0.0.1
+
+Prometheus Exporter for [TP-Link Omada](https://www.tp-link.com/en/business-networking/omada/controller/) SDN.
+
+Due to current limitations of Omada OpenAPI, 
+both Web API and OpenAPI are supported.
+
+## How to run
+Review Environmental variables and create the `.env` file to 
+provide necessary values for docker compose to start.
+
+### Environmental variables
+| Name | Description |
+|------|-------------|
+|`BASE_URL`|The URL to Omada portal, including protocol and port. Both http and https are supported|
+|`VERIFY_CERTIFICATE`|Mostly related to HTTPS if you are using untrusted certificate|
+|`OMADA_CLIENT_ID`|Client ID for app created in section Platform Integration, used for OpenAPI requests|
+|`OMADA_CLIENT_SECRET`|Client Secret for app created in section Platform Integration, used for OpenAPI requests|
+|`OMADA_USER`|User name of the account which will be used to authenticate to the WebAPI|
+|`OMADA_USER_PASSWORD`|Password for the account which will be used to authenticate to the WebAPI|
+
+### Omada Auth objects permissions
+- **OpenAPI Application** (*OMADA_CLIENT*) - It can be created at the Global management level of the controller in path: 
+`Setttings -> Platform Integration`. 
+OpenApi app needs administrator role assigned, 
+to be able to query all endpoints used within this exporter
+- **User Account** (*OMADA_USER*) - it is a standard user account ,
+which can be created at Global management level of the controller,
+in path: `Account`. `viewer` role will provide enough access for 
+this "service" user account.
+
+## Tested on devices:
+- **Switch**: [SG2218 v1.20](https://www.tp-link.com/en/business-networking/omada-switch-smart/sg2218/)
+- **Router**: [ER707-M2 v1.0](https://www.tp-link.com/en/business-networking/omada-router-wired-router/er707-m2/v1/)
+- **Access Point**: [EAP650(EU) v1.0](https://www.tp-link.com/en/business-networking/omada-wifi-ceiling-mount/eap650/v1/)
+- **Omada controller**: [Software Controller v5.13 hosted in Docker container](https://github.com/mbentley/docker-omada-controller)
