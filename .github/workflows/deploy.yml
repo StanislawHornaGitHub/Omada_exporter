@@ -1,0 +1,25 @@
+name: Deployment
+run-name: Deployment ${{ inputs.version }} to ${{ inputs.environment }}
+
+on: 
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        default: "development"
+        options:
+          - development
+          - production
+      version:
+        type: string
+        required: false
+        default: "latest"
+
+
+jobs:
+  Deploy:
+    uses: HornaHomeLab/Actions_Deployments/.github/workflows/Run_docker_compose.yml@main
+    with:
+      environment: ${{ inputs.environment }}
+      version: ${{ inputs.version }}
+    secrets: inherit

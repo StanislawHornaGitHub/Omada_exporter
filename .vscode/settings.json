@@ -1,0 +1,15 @@
+{
+    "cSpell.words": [
+        "dotenv",
+        "fastapi",
+        "healthcheck",
+        "OMADA",
+        "omadac",
+        "Pkts",
+        "pvid",
+        "pydantic",
+        "rssi",
+        "timespan",
+        "uvicorn"
+    ]
+}
