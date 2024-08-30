@@ -9,7 +9,7 @@ class HealthCheck:
     __web_api_endpoint: str = "/api/v2/maintenance/controllerStatus"
 
     @staticmethod
-    def get():
+    def get() -> dict[str,str]:
         return {
             "UserSession": HealthCheck.__test_web_api_endpoint(),
             "OpenAPI": HealthCheck.__test_open_api_endpoint(),

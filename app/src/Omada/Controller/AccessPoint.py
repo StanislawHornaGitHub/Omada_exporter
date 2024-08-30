@@ -26,7 +26,7 @@ class AccessPoint:
         return result
 
     @staticmethod
-    def get_port_info():
+    def get_port_info() -> list[Model.Ports.AccessPointPort]:
         access_point_port: list[Model.Ports.AccessPointPort] = []
 
         for ap in Devices.access_points:
@@ -51,7 +51,7 @@ class AccessPoint:
         return access_point_port
 
     @staticmethod
-    def get_radio_info():
+    def get_radio_info() -> list[Model.Ports.AccessPointRadio]:
         access_point_radio: list[Model.Ports.AccessPointRadio] = []
 
         for ap in Devices.access_points:
@@ -76,7 +76,7 @@ class AccessPoint:
         return access_point_radio
 
     @staticmethod
-    def get_radio_stats():
+    def get_radio_stats() -> list[Model.Ports.AccessPointRadioStats]:
         access_point_radio_stat: list[Model.Ports.AccessPointRadioStats] = []
         current_time = int(datetime.datetime.now().timestamp())
         for ap in Devices.access_points:

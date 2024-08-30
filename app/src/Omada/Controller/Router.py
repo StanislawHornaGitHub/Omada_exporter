@@ -29,7 +29,7 @@ class Router:
         return result
 
     @staticmethod
-    def get_port_info():
+    def get_port_info() -> tuple[list[Model.Ports.RouterPort], list[Model.Ports.RouterPortStats]]:
         router_port: list[Model.Ports.RouterPort] = []
         router_port_stats: list[Model.Ports.RouterPortStats] = []
 

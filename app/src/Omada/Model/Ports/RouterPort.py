@@ -25,7 +25,7 @@ class RouterPort(BaseModel):
     protocol: str = Field(alias="proto", default="null")
     wanPortIpv6Config: WanPortIpv6Config = Field(default=None)
     wanPortIpv4Config: WanPortIpv4Config = Field(default=None)
-    latency: int
+    latency: int = Field(default=1)
     loss: float | None
 
     def __init__(self, **data):
