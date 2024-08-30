@@ -1,0 +1,3846 @@
+{
+    "__inputs": [
+        {
+            "name": "DS_PROMETHEUS_INFRASTRUCTURE",
+            "label": "Prometheus_Infrastructure",
+            "description": "",
+            "type": "datasource",
+            "pluginId": "prometheus",
+            "pluginName": "Prometheus"
+        }
+    ],
+    "__elements": {},
+    "__requires": [
+        {
+            "type": "grafana",
+            "id": "grafana",
+            "name": "Grafana",
+            "version": "11.1.4"
+        },
+        {
+            "type": "datasource",
+            "id": "prometheus",
+            "name": "Prometheus",
+            "version": "1.0.0"
+        },
+        {
+            "type": "panel",
+            "id": "stat",
+            "name": "Stat",
+            "version": ""
+        },
+        {
+            "type": "panel",
+            "id": "table",
+            "name": "Table",
+            "version": ""
+        },
+        {
+            "type": "panel",
+            "id": "timeseries",
+            "name": "Time series",
+            "version": ""
+        }
+    ],
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": {
+                    "type": "grafana",
+                    "uid": "-- Grafana --"
+                },
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": null,
+    "links": [],
+    "panels": [
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 0,
+                "y": 0
+            },
+            "id": 1,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"1\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 1",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 2,
+                "y": 0
+            },
+            "id": 6,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"3\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 3",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 4,
+                "y": 0
+            },
+            "id": 8,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"5\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 5",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 6,
+                "y": 0
+            },
+            "id": 10,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"7\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 7",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 8,
+                "y": 0
+            },
+            "id": 11,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"9\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 9",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 10,
+                "y": 0
+            },
+            "id": 12,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"11\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 11",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 12,
+                "y": 0
+            },
+            "id": 13,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"13\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 13",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 14,
+                "y": 0
+            },
+            "id": 14,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"15\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 15",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 16,
+                "y": 0
+            },
+            "id": 15,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"17\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 17",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "name"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 73
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "ip"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 98
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 6,
+                "x": 18,
+                "y": 0
+            },
+            "id": 22,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "showHeader": true,
+                "sortBy": []
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "device_info{deviceType=\"Switch\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Devices",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "instance": true,
+                            "job": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {
+                            "Time": 0,
+                            "Value": 10,
+                            "__name__": 1,
+                            "deviceType": 7,
+                            "firmwareVersion": 6,
+                            "instance": 8,
+                            "ip": 4,
+                            "job": 9,
+                            "mac": 3,
+                            "model": 5,
+                            "name": 2
+                        },
+                        "renameByName": {}
+                    }
+                }
+            ],
+            "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 0,
+                "y": 4
+            },
+            "id": 5,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"2\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 2",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 2,
+                "y": 4
+            },
+            "id": 7,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"4\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 4",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 4,
+                "y": 4
+            },
+            "id": 9,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"6\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 6",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 6,
+                "y": 4
+            },
+            "id": 16,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"8\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 8",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 8,
+                "y": 4
+            },
+            "id": 17,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"10\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 10",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 10,
+                "y": 4
+            },
+            "id": 18,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"12\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 12",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 12,
+                "y": 4
+            },
+            "id": 19,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"14\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 14",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 14,
+                "y": 4
+            },
+            "id": 21,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"16\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 16",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1000M": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "100M": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "10M": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "Down": {
+                                    "color": "red",
+                                    "index": 0
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 2,
+                "x": 16,
+                "y": 4
+            },
+            "id": 20,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "/^linkSpeed$/",
+                    "limit": 25,
+                    "values": true
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "switch_port_info{port=\"18\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "{{instance}}",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Port 18",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "name": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portName": false,
+                            "profileName": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
+                        }
+                    }
+                }
+            ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 0,
+                "y": 8
+            },
+            "id": 23,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"1\"} + switch_port_tx_rate{port=\"1\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 1",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 3,
+                "y": 8
+            },
+            "id": 25,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"3\"} + switch_port_tx_rate{port=\"3\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 3",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 6,
+                "y": 8
+            },
+            "id": 26,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"5\"} + switch_port_tx_rate{port=\"5\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 5",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 9,
+                "y": 8
+            },
+            "id": 29,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"7\"} + switch_port_tx_rate{port=\"7\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 7",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 12,
+                "y": 8
+            },
+            "id": 31,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"9\"} + switch_port_tx_rate{port=\"9\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 9",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 15,
+                "y": 8
+            },
+            "id": 32,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"11\"} + switch_port_tx_rate{port=\"11\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 11",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 18,
+                "y": 8
+            },
+            "id": 33,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"13\"} + switch_port_tx_rate{port=\"13\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 13",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 21,
+                "y": 8
+            },
+            "id": 34,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"15\"} + switch_port_tx_rate{port=\"15\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 15",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 0,
+                "y": 14
+            },
+            "id": 24,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"2\"} + switch_port_tx_rate{port=\"2\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 2",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 3,
+                "y": 14
+            },
+            "id": 28,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"4\"} + switch_port_tx_rate{port=\"4\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 4",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 6,
+                "y": 14
+            },
+            "id": 27,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"6\"} + switch_port_tx_rate{port=\"6\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 6",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 9,
+                "y": 14
+            },
+            "id": 30,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"8\"} + switch_port_tx_rate{port=\"8\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 8",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 12,
+                "y": 14
+            },
+            "id": 35,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"10\"} + switch_port_tx_rate{port=\"10\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 10",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 15,
+                "y": 14
+            },
+            "id": 36,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"12\"} + switch_port_tx_rate{port=\"12\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 12",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 18,
+                "y": 14
+            },
+            "id": 38,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"14\"} + switch_port_tx_rate{port=\"14\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 14",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 21,
+                "y": 14
+            },
+            "id": 37,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"16\"} + switch_port_tx_rate{port=\"16\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 16",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 12,
+                "x": 0,
+                "y": 20
+            },
+            "id": 40,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"17\"} + switch_port_tx_rate{port=\"17\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 17 SFP",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "blue",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 12,
+                "x": 12,
+                "y": 20
+            },
+            "id": 39,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "switch_port_rx_rate{port=\"18\"} + switch_port_tx_rate{port=\"18\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Rate port 18 SFP",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "%"
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "memory_usage"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.axisPlacement",
+                                "value": "right"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 24,
+                "x": 0,
+                "y": 23
+            },
+            "id": 2,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true,
+                    "sortBy": "Name",
+                    "sortDesc": false
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "expr": "cpu_usage{deviceType=\"Switch\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "{{name}} ({{__name__}})",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "expr": "memory_usage{deviceType=\"Switch\"}",
+                    "fullMetaSearch": false,
+                    "hide": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "{{name}} ({{__name__}})",
+                    "range": true,
+                    "refId": "B",
+                    "useBackend": false
+                }
+            ],
+            "title": "Resource consumption",
+            "type": "timeseries"
+        }
+    ],
+    "schemaVersion": 39,
+    "tags": [
+        "Omada"
+    ],
+    "templating": {
+        "list": []
+    },
+    "time": {
+        "from": "now-6h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "Switch",
+    "uid": "advqgazfw4xs0c",
+    "version": 1,
+    "weekStart": ""
+}

@@ -1,18 +1,42 @@
+<p float="left">
+  <img src="/Pictures/prometheus_logo.png" width="100" />
+  <img src="/Pictures/omada_logo.png" width="100" />
+  <img src="/Pictures/fastapi_logo.png" height="100" />
+  <img src="/Pictures/docker_logo.png" height="100" />
+</p>
+
 # Omada_exporter
-##### version: 0.0.3
+[![CodeQL](https://github.com/HornaHomeLab/Omada_exporter/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/HornaHomeLab/Omada_exporter/actions/workflows/github-code-scanning/codeql)
+[![CI/CD](https://github.com/HornaHomeLab/Omada_exporter/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/HornaHomeLab/Omada_exporter/actions/workflows/ci-cd.yml)
+
+##### version: 1.0.0
 
 Prometheus Exporter for [TP-Link Omada](https://www.tp-link.com/en/business-networking/omada/controller/) SDN.
 
-It is FastAPI based application to expose basic network devices' metrics for Prometheus Server to scrape.
+It is containerized FastAPI based application to expose basic network devices' metrics for Prometheus Server to scrape.
 Omada controller is queried when `/metrics` endpoint is accessed, 
 which means that if this exporter is not in use it do not generate traffic to omada controller.
 
 Due to current limitations of Omada OpenAPI, both Web API and OpenAPI are supported.
 
+Find available exporter's metrics [here](/app/src/Prometheus/README.md#supported-metrics)
+
+## Sample Grafana dashboards
+Dashboards are available for import [here](/Grafana/Dashboards/)
+
+### Router
+![image](/Grafana/Pictures/Router.png)
+### Switch
+![image](/Grafana/Pictures/Switch.png)
+### Access Point
+![image](/Grafana/Pictures/AccessPoint.png)
+
+
 ## How to run
 1. Create the `.env` file to provide necessary values specified in [Parameters](#parameters) section.
-2. Start docker compose using `docker compose up -d`
-3. Metrics will be available at `http://<your_hostname>:51772/metrics`
+2. Build docker image using `docker compose build`
+3. Start docker compose using `docker compose up -d`
+4. Metrics will be available at `http://<your_hostname>:51772/metrics`
 
 
 > [!IMPORTANT] 
@@ -31,7 +55,7 @@ Due to current limitations of Omada OpenAPI, both Web API and OpenAPI are suppor
 
 ### Omada Auth objects permissions
 - **OpenAPI Application** (*OMADA_CLIENT*) - It can be created at the Global management level of the controller in path: 
-`Setttings -> Platform Integration`. 
+`Settings -> Platform Integration`. 
 OpenApi app needs administrator role assigned, 
 to be able to query all endpoints used within this exporter
 - **User Account** (*OMADA_USER*) - it is a standard user account ,
