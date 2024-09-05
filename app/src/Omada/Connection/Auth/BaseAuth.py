@@ -9,7 +9,7 @@ class BaseAuth:
     
     @staticmethod
     def get_url(path: str, args: dict ={}) -> str:
-        url: str = "{base_url}/{path}"
+        url: str = "{base_url}{path}"
         path: str = path.format(
             **args
         )

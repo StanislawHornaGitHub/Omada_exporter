@@ -9,7 +9,7 @@
 [![CodeQL](https://github.com/HornaHomeLab/Omada_exporter/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/HornaHomeLab/Omada_exporter/actions/workflows/github-code-scanning/codeql)
 [![CI/CD](https://github.com/HornaHomeLab/Omada_exporter/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/HornaHomeLab/Omada_exporter/actions/workflows/ci-cd.yml)
 
-##### version: 1.0.0
+##### version: 1.0.1
 
 Prometheus Exporter for [TP-Link Omada](https://www.tp-link.com/en/business-networking/omada/controller/) SDN.
 

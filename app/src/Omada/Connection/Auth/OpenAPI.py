@@ -32,7 +32,7 @@ class OpenAPI(BaseAuth):
 
     @staticmethod
     def __is_token_expired() -> bool:
-        return ((OpenAPI.expires_at - datetime.timedelta(seconds=60)) < datetime.datetime.now())
+        return ((OpenAPI.expires_at - datetime.timedelta(seconds=300)) < datetime.datetime.now())
 
     @staticmethod
     def __set_expiration_time(expires_in: int) -> None:
@@ -53,9 +53,7 @@ class OpenAPI(BaseAuth):
         response: requests.Response = requests.post(url=url, json=body)
         result: dict = requestHelpers.get_request_result(url, response)
 
-        OpenAPI.__accessToken = result.get("accessToken")
-        OpenAPI.__refreshToken = result.get("refreshToken")
-        OpenAPI.__set_expiration_time(result.get("expiresIn"))
+        OpenAPI.__set_token_details(result)
 
     @staticmethod
     def __refresh_token() -> None:
@@ -67,11 +65,16 @@ class OpenAPI(BaseAuth):
                 "refresh_token": OpenAPI.__refreshToken
             }
         )
-        response: requests.Request = requests.post(url)
-        result: dict = requestHelpers.get_request_result(url, response)
+        try:
+            response: requests.Request = requests.post(url)
+            result: dict = requestHelpers.get_request_result(url, response)
 
+            OpenAPI.__set_token_details(result)
+        except:
+            OpenAPI.__request_token()
+
+    @staticmethod
+    def __set_token_details(result: dict):
         OpenAPI.__accessToken = result.get("accessToken")
         OpenAPI.__refreshToken = result.get("refreshToken")
         OpenAPI.__set_expiration_time(result.get("expiresIn"))
-
-
