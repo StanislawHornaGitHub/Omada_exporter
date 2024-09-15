@@ -32,19 +32,19 @@ access_point_radio_info =[
 
 class AccessPoint(BaseDeviceMetrics):
     port_rx: Gauge = Gauge(
-        "access_point_port_rx", "Sum of received bytes", access_point_port_identity_labels
+        "access_point_port_rx_sum", "Sum of received bytes", access_point_port_identity_labels
     )
     port_tx: Gauge = Gauge(
-        "access_point_port_tx", "Sum of transmitted bytes", access_point_port_identity_labels
+        "access_point_port_tx_sum", "Sum of transmitted bytes", access_point_port_identity_labels
     )
     port_info: Info = Info(
         "access_point_port", "Access point port info", access_point_port_identity_labels
     )
     radio_rx: Gauge = Gauge(
-        "radio_rx", "Sum of received bytes", access_point_radio_labels
+        "radio_rx_sum", "Sum of received bytes", access_point_radio_labels
     )
     radio_tx: Gauge = Gauge(
-        "radio_tx", "Sum of transmitted bytes", access_point_radio_labels
+        "radio_tx_sum", "Sum of transmitted bytes", access_point_radio_labels
     )
     radio_info: Info = Info(
         "radio", "Access point radio details", access_point_radio_labels
@@ -68,28 +68,28 @@ class AccessPoint(BaseDeviceMetrics):
         "radio_tx_retry_pkts_rate", "Transmitted packets retry", access_point_radio_labels
     )
     radio_rx_pkts: Gauge = Gauge(
-        "radio_rx_pkts", "Sum of received packets", access_point_radio_labels
+        "radio_rx_pkts_sum", "Sum of received packets", access_point_radio_labels
     )
     radio_tx_pkts: Gauge = Gauge(
-        "radio_tx_pkts", "Sum of transmitted packets", access_point_radio_labels
+        "radio_tx_pkts_sum", "Sum of transmitted packets", access_point_radio_labels
     )
     radio_rx_pkts_dropped: Gauge = Gauge(
-        "radio_rx_pkts_dropped", "Sum of dropped rx packets", access_point_radio_labels
+        "radio_rx_pkts_dropped_sum", "Sum of dropped rx packets", access_point_radio_labels
     )
     radio_tx_pkts_dropped: Gauge = Gauge(
-        "radio_tx_pkts_dropped", "Sum of dropped tx packets", access_point_radio_labels
+        "radio_tx_pkts_dropped_sum", "Sum of dropped tx packets", access_point_radio_labels
     )
     radio_rx_pkts_error: Gauge = Gauge(
-        "radio_rx_pkts_error", "Sum of error rx packets", access_point_radio_labels
+        "radio_rx_pkts_error_sum", "Sum of error rx packets", access_point_radio_labels
     )
     radio_tx_pkts_error: Gauge = Gauge(
-        "radio_tx_pkts_error", "Sum of error tx packets", access_point_radio_labels
+        "radio_tx_pkts_error_sum", "Sum of error tx packets", access_point_radio_labels
     )
     radio_rx_pkts_retry: Gauge = Gauge(
-        "radio_rx_pkts_retry", "Sum of retry rx packets", access_point_radio_labels
+        "radio_rx_pkts_retry_sum", "Sum of retry rx packets", access_point_radio_labels
     )
     radio_tx_pkts_retry: Gauge = Gauge(
-        "radio_tx_pkts_retry", "Sum of retry tx packets", access_point_radio_labels
+        "radio_tx_pkts_retry_sum", "Sum of retry tx packets", access_point_radio_labels
     )
 
     @staticmethod

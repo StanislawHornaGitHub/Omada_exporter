@@ -7,6 +7,13 @@
             "type": "datasource",
             "pluginId": "prometheus",
             "pluginName": "Prometheus"
+        },
+        {
+            "name": "VAR_INCREASE_INTERVAL",
+            "type": "constant",
+            "label": "increase_interval",
+            "value": "1m",
+            "description": ""
         }
     ],
     "__elements": {},
@@ -54,6 +61,12 @@
                 "hide": true,
                 "iconColor": "rgba(0, 211, 255, 1)",
                 "name": "Annotations & Alerts",
+                "target": {
+                    "limit": 100,
+                    "matchAny": false,
+                    "tags": [],
+                    "type": "dashboard"
+                },
                 "type": "dashboard"
             }
         ]
@@ -64,6 +77,138 @@
     "id": null,
     "links": [],
     "panels": [
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "purple",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "decbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 12,
+                "x": 0,
+                "y": 0
+            },
+            "id": 9,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "editorMode": "code",
+                    "expr": "sum(increase(radio_rx_sum[$__range]) + increase(radio_tx_sum[$__range]))",
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Transferred",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "purple",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 12,
+                "x": 12,
+                "y": 0
+            },
+            "id": 10,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "editorMode": "code",
+                    "expr": "sum(increase(radio_rx_sum[$increase_interval]) + increase(radio_tx_sum[$increase_interval]))",
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Bandwidth",
+            "type": "stat"
+        },
         {
             "datasource": {
                 "type": "prometheus",
@@ -128,7 +273,7 @@
                 "h": 10,
                 "w": 10,
                 "x": 0,
-                "y": 0
+                "y": 5
             },
             "id": 2,
             "options": {
@@ -228,7 +373,7 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 118
+                                "value": 138
                             }
                         ]
                     },
@@ -240,7 +385,7 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 85
+                                "value": 93
                             }
                         ]
                     },
@@ -252,7 +397,67 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 117
+                                "value": 138
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "maxTxRate"
+                        },
+                        "properties": [
+                            {
+                                "id": "unit",
+                                "value": "Mbps"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Frequency"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 109
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Access Point name"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 144
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Access Point"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 106
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Channel bandwidth"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 146
                             }
                         ]
                     }
@@ -260,9 +465,9 @@
             },
             "gridPos": {
                 "h": 10,
-                "w": 7,
+                "w": 14,
                 "x": 10,
-                "y": 0
+                "y": 5
             },
             "id": 3,
             "options": {
@@ -314,8 +519,8 @@
                             "Time": 0,
                             "Value": 12,
                             "__name__": 1,
-                            "actualChannel": 6,
-                            "bandWidth": 5,
+                            "actualChannel": 5,
+                            "bandWidth": 6,
                             "frequency": 3,
                             "instance": 7,
                             "job": 8,
@@ -325,136 +530,14 @@
                             "name": 2,
                             "region": 11
                         },
-                        "renameByName": {}
-                    }
-                }
-            ],
-            "type": "table"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "custom": {
-                        "align": "auto",
-                        "cellOptions": {
-                            "type": "auto"
-                        },
-                        "inspect": false
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    }
-                },
-                "overrides": [
-                    {
-                        "matcher": {
-                            "id": "byName",
-                            "options": "name"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.width",
-                                "value": 57
-                            }
-                        ]
-                    },
-                    {
-                        "matcher": {
-                            "id": "byName",
-                            "options": "ip"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.width",
-                                "value": 89
-                            }
-                        ]
-                    }
-                ]
-            },
-            "gridPos": {
-                "h": 10,
-                "w": 7,
-                "x": 17,
-                "y": 0
-            },
-            "id": 5,
-            "options": {
-                "cellHeight": "sm",
-                "footer": {
-                    "countRows": false,
-                    "fields": "",
-                    "reducer": [
-                        "sum"
-                    ],
-                    "show": false
-                },
-                "showHeader": true,
-                "sortBy": []
-            },
-            "pluginVersion": "11.1.4",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
-                    },
-                    "editorMode": "code",
-                    "exemplar": false,
-                    "expr": "device_info{deviceType=\"AccessPoint\"}",
-                    "format": "table",
-                    "instant": true,
-                    "legendFormat": "__auto",
-                    "range": false,
-                    "refId": "A"
-                }
-            ],
-            "title": "Devices",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "Value": true,
-                            "__name__": true,
-                            "deviceType": true,
-                            "instance": true,
-                            "job": true
-                        },
-                        "includeByName": {},
-                        "indexByName": {
-                            "Time": 0,
-                            "Value": 10,
-                            "__name__": 1,
-                            "deviceType": 3,
-                            "firmwareVersion": 7,
-                            "instance": 8,
-                            "ip": 5,
-                            "job": 9,
-                            "mac": 4,
-                            "model": 6,
-                            "name": 2
-                        },
-                        "renameByName": {}
+                        "renameByName": {
+                            "actualChannel": "Channel",
+                            "bandWidth": "Channel bandwidth",
+                            "frequency": "Frequency",
+                            "maxTxRate": "Max TX speed",
+                            "mode": "Mode",
+                            "name": "Access Point"
+                        }
                     }
                 }
             ],
@@ -488,7 +571,7 @@
                 "h": 5,
                 "w": 12,
                 "x": 0,
-                "y": 10
+                "y": 15
             },
             "id": 7,
             "options": {
@@ -516,7 +599,7 @@
                         "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
                     },
                     "editorMode": "code",
-                    "expr": "avg(radio_rx_rate{frequency=\"5 GHz\"} + radio_tx_rate{frequency=\"5 GHz\"})",
+                    "expr": "sum(increase(radio_rx_sum{frequency=\"5 GHz\"}[$increase_interval]) + increase(radio_tx_sum{frequency=\"5 GHz\"}[$increase_interval]))",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -554,7 +637,7 @@
                 "h": 5,
                 "w": 12,
                 "x": 12,
-                "y": 10
+                "y": 15
             },
             "id": 6,
             "options": {
@@ -582,7 +665,7 @@
                         "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
                     },
                     "editorMode": "code",
-                    "expr": "avg(radio_rx_rate{frequency=\"2.4 GHz\"} + radio_tx_rate{frequency=\"2.4 GHz\"})",
+                    "expr": "sum(increase(radio_rx_sum{frequency=\"2.4 GHz\"}[$increase_interval]) + increase(radio_tx_sum{frequency=\"2.4 GHz\"}[$increase_interval]))",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -653,10 +736,10 @@
                 "overrides": []
             },
             "gridPos": {
-                "h": 12,
-                "w": 12,
+                "h": 11,
+                "w": 24,
                 "x": 0,
-                "y": 15
+                "y": 20
             },
             "id": 4,
             "options": {
@@ -683,7 +766,7 @@
                         "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
                     },
                     "editorMode": "code",
-                    "expr": "radio_rx_rate + radio_tx_util",
+                    "expr": "increase(radio_rx_sum[$increase_interval]) + increase(radio_tx_sum[$increase_interval])",
                     "instant": false,
                     "legendFormat": "{{name}}-{{frequency}}",
                     "range": true,
@@ -754,9 +837,9 @@
             },
             "gridPos": {
                 "h": 12,
-                "w": 12,
-                "x": 12,
-                "y": 15
+                "w": 24,
+                "x": 0,
+                "y": 31
             },
             "id": 8,
             "options": {
@@ -783,7 +866,7 @@
                         "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
                     },
                     "editorMode": "code",
-                    "expr": "radio_tx_retry_pkts_rate + radio_rx_retry_pkts_rate",
+                    "expr": "increase(radio_tx_pkts_retry_sum[$increase_interval]) +  increase(radio_rx_pkts_retry_sum[$increase_interval])",
                     "instant": false,
                     "legendFormat": "{{name}}-{{frequency}}",
                     "range": true,
@@ -852,34 +935,13 @@
                     },
                     "unit": "%"
                 },
-                "overrides": [
-                    {
-                        "matcher": {
-                            "id": "byRegexp",
-                            "options": "/.memory_usage*/"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.axisPlacement",
-                                "value": "right"
-                            },
-                            {
-                                "id": "custom.axisSoftMin",
-                                "value": 0
-                            },
-                            {
-                                "id": "custom.axisSoftMax",
-                                "value": 100
-                            }
-                        ]
-                    }
-                ]
+                "overrides": []
             },
             "gridPos": {
                 "h": 18,
                 "w": 24,
                 "x": 0,
-                "y": 27
+                "y": 43
             },
             "id": 1,
             "options": {
@@ -936,6 +998,147 @@
             ],
             "title": "Resource consumption",
             "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "name"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 57
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "ip"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 89
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "mac"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 185
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 18,
+                "x": 0,
+                "y": 61
+            },
+            "id": 5,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "showHeader": true,
+                "sortBy": []
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "device_info{deviceType=\"AccessPoint\"}",
+                    "format": "table",
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "A"
+                }
+            ],
+            "title": "Devices",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "deviceType": true,
+                            "instance": true,
+                            "job": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {
+                            "Time": 0,
+                            "Value": 10,
+                            "__name__": 1,
+                            "deviceType": 3,
+                            "firmwareVersion": 7,
+                            "instance": 8,
+                            "ip": 5,
+                            "job": 9,
+                            "mac": 4,
+                            "model": 6,
+                            "name": 2
+                        },
+                        "renameByName": {}
+                    }
+                }
+            ],
+            "type": "table"
         }
     ],
     "schemaVersion": 39,
@@ -943,16 +1146,36 @@
         "Omada"
     ],
     "templating": {
-        "list": []
+        "list": [
+            {
+                "hide": 2,
+                "name": "increase_interval",
+                "query": "${VAR_INCREASE_INTERVAL}",
+                "skipUrlSync": false,
+                "type": "constant",
+                "current": {
+                    "value": "${VAR_INCREASE_INTERVAL}",
+                    "text": "${VAR_INCREASE_INTERVAL}",
+                    "selected": false
+                },
+                "options": [
+                    {
+                        "value": "${VAR_INCREASE_INTERVAL}",
+                        "text": "${VAR_INCREASE_INTERVAL}",
+                        "selected": false
+                    }
+                ]
+            }
+        ]
     },
     "time": {
-        "from": "now-6h",
+        "from": "now-1h",
         "to": "now"
     },
     "timepicker": {},
     "timezone": "browser",
     "title": "AccessPoint",
     "uid": "bdwa3qd4rwidce",
-    "version": 1,
+    "version": 8,
     "weekStart": ""
 }

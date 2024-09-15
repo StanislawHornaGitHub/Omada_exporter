@@ -27,10 +27,10 @@ class Router(BaseDeviceMetrics):
         "router_temperature", "Router temperature in Celsius", ["name", "mac"]
     )
     port_rx: Gauge = Gauge(
-        "router_port_rx", "Sum of received bytes", router_identity_labels
+        "router_port_rx_sum", "Sum of received bytes", router_identity_labels
     )
     port_tx: Gauge = Gauge(
-        "router_port_tx", "Sum of transmitted bytes", router_identity_labels
+        "router_port_tx_sum", "Sum of transmitted bytes", router_identity_labels
     )
     port_rx_rate: Gauge = Gauge(
         "router_port_rx_rate", "Received bytes per second", router_identity_labels
@@ -54,7 +54,7 @@ class Router(BaseDeviceMetrics):
         "router_port_ipv6_config", "Router port ipv6 config", router_identity_labels
     )
     port_rx_pkts: Gauge = Gauge(
-        "router_port_rx_pkts", "Received packets", router_identity_labels
+        "router_port_rx_pkts_sum", "Received packets", router_identity_labels
     )
     port_tx_pkts: Gauge = Gauge(
         "router_port_tx_pkts", "Transmitted packets", router_identity_labels

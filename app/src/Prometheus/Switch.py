@@ -21,10 +21,10 @@ switch_port_info = [
 
 class Switch(BaseDeviceMetrics):
     port_rx: Gauge = Gauge(
-        "switch_port_rx", "Sum of received bytes", switch_identity_labels
+        "switch_port_rx_sum", "Sum of received bytes", switch_identity_labels
     )
     port_tx: Gauge = Gauge(
-        "switch_port_tx", "Sum of transmitted bytes", switch_identity_labels
+        "switch_port_tx_sum", "Sum of transmitted bytes", switch_identity_labels
     )
     port_rx_rate: Gauge = Gauge(
         "switch_port_rx_rate", "Received bytes per second", switch_identity_labels
