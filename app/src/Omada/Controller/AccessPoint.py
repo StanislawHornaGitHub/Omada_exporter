@@ -35,18 +35,20 @@ class AccessPoint:
                     "apMac": ap.mac
                 }
             )
-
-            access_point_port.append(
-                Model.Ports.AccessPointPort(
-                    **(
-                        {
-                            "accessPointName": ap.name,
-                            "accessPointMac": ap.mac,
-                            **ap_port_response.get("wiredUplink"),
-                        }
+            try:
+                access_point_port.append(
+                    Model.Ports.AccessPointPort(
+                        **(
+                            {
+                                "accessPointName": ap.name,
+                                "accessPointMac": ap.mac,
+                                **ap_port_response.get("wiredUplink"),
+                            }
+                        )
                     )
                 )
-            )
+            except:
+                pass
 
         return access_point_port
 
@@ -74,55 +76,3 @@ class AccessPoint:
             )
 
         return access_point_radio
-
-    @staticmethod
-    def get_radio_stats() -> list[Model.Ports.AccessPointRadioStats]:
-        access_point_radio_stat: list[Model.Ports.AccessPointRadioStats] = []
-        current_time = int(datetime.datetime.now().timestamp())
-        for ap in Devices.access_points:
-            ap_radio_response: dict = Connection.Request.post(
-                AccessPoint.__access_point_radio_stats_path, {
-                    "apMac": ap.mac
-                },
-                {
-                    "attrs": [
-                        "tx2g",
-                        "rx2g",
-                        "tx5g",
-                        "rx5g",
-                        "rxRetryPkts2g",
-                        "txRetryPkts2g",
-                        "rxRetryPkts5g",
-                        "txRetryPkts5g",
-                    ],
-                    "start": current_time - 301,
-                    "end":   current_time
-                }
-            )[-1]
-            try:
-                access_point_radio_stat.append(
-                    Model.Ports.AccessPointRadioStats(
-                        **{
-                            "accessPointName": ap.name,
-                            "accessPointMac": ap.mac,
-                            "frequency": "2.4 GHz",
-                            **ap_radio_response.get("traffic2g")
-                        }
-                    )
-                )
-            except:
-                pass
-            try:
-                access_point_radio_stat.append(
-                    Model.Ports.AccessPointRadioStats(
-                        **{
-                            "accessPointName": ap.name,
-                            "accessPointMac": ap.mac,
-                            "frequency": "5 GHz",
-                            **ap_radio_response.get("traffic5g")
-                        }
-                    )
-                )
-            except:
-                pass
-        return access_point_radio_stat

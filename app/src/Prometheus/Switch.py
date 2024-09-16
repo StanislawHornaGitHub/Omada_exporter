@@ -54,12 +54,10 @@ class Switch(BaseDeviceMetrics):
     @staticmethod
     def update_metrics(
         switch_metrics: list[Omada.Model.Switch],
-        switch_port_metrics: list[Omada.Model.Ports.SwitchPort],
-        switch_port_stats: list[Omada.Model.Ports.SwitchPortStats]
+        switch_port_metrics: list[Omada.Model.Ports.SwitchPort]
     ):
         Switch.update_base_metrics(switch_metrics)
         Switch.__update_port_status(switch_port_metrics)
-        Switch.__update_port_statistics(switch_port_stats)
 
     @staticmethod
     def __update_port_status(switch_port_metrics: list[Omada.Model.Ports.SwitchPort]):
@@ -71,17 +69,3 @@ class Switch(BaseDeviceMetrics):
             Switch.port_tx.labels(**(port_labels)).set(port.tx)
             Switch.port_info.labels(
                 **(port_labels)).info(Switch.get_labels(port, switch_port_info))
-
-    @staticmethod
-    def __update_port_statistics(switch_port_stats: list[Omada.Model.Ports.SwitchPortStats]):
-        for port in switch_port_stats:
-            port_labels: dict[str, str] = Switch.get_labels(
-                port, switch_identity_labels)
-
-            Switch.port_rx_rate.labels(**(port_labels)).set(port.rxRate)
-            Switch.port_tx_rate.labels(**(port_labels)).set(port.txRate)
-            Switch.port_rx_pkts.labels(**(port_labels)).set(port.rxPkts)
-            Switch.port_tx_pkts.labels(**(port_labels)).set(port.txPkts)
-            Switch.port_rx_err_pkts.labels(**(port_labels)).set(port.rxErrPkts)
-            Switch.port_tx_err_pkts.labels(**(port_labels)).set(port.dropPkts)
-            Switch.port_drop_pkts.labels(**(port_labels)).set(port.txErrPkts)

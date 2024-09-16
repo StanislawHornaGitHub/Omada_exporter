@@ -55,18 +55,6 @@ class AccessPoint(BaseDeviceMetrics):
     radio_tx_util: Gauge = Gauge(
         "radio_tx_util", "Percentage of transmit channel bandwidth usage", access_point_radio_labels
     )
-    radio_rx_rate: Gauge = Gauge(
-        "radio_rx_rate", "Received bits per second", access_point_radio_labels
-    )
-    radio_tx_rate: Gauge = Gauge(
-        "radio_tx_rate", "Transmitted bits per second", access_point_radio_labels
-    )
-    radio_rx_retry_pkts_rate: Gauge = Gauge(
-        "radio_rx_retry_pkts_rate", "Received packets retry", access_point_radio_labels
-    )
-    radio_tx_retry_pkts_rate: Gauge = Gauge(
-        "radio_tx_retry_pkts_rate", "Transmitted packets retry", access_point_radio_labels
-    )
     radio_rx_pkts: Gauge = Gauge(
         "radio_rx_pkts_sum", "Sum of received packets", access_point_radio_labels
     )
@@ -96,13 +84,11 @@ class AccessPoint(BaseDeviceMetrics):
     def update_metrics(
         access_point_metrics: list[Omada.Model.AccessPoint],
         access_point_port_metrics: list[Omada.Model.Ports.AccessPointPort],
-        access_point_radio_metrics: list[Omada.Model.Ports.AccessPointRadio],
-        access_point_radio_stats: list[Omada.Model.Ports.AccessPointRadioStats]
+        access_point_radio_metrics: list[Omada.Model.Ports.AccessPointRadio]
     ):
         AccessPoint.update_base_metrics(access_point_metrics)
         AccessPoint.__update_port_status(access_point_port_metrics)
         AccessPoint.__update_radio_traffic_stats(access_point_radio_metrics)
-        AccessPoint.__update_radio_stats(access_point_radio_stats)
 
     @staticmethod
     def __update_port_status(port_metrics: list[Omada.Model.Ports.AccessPointPort]):
@@ -139,13 +125,3 @@ class AccessPoint(BaseDeviceMetrics):
                     AccessPoint.radio_tx_pkts_error.labels(**radio_traffic_labels).set(value.txErrPkts)
                     AccessPoint.radio_rx_pkts_retry.labels(**radio_traffic_labels).set(value.rxRetryPkts)
                     AccessPoint.radio_tx_pkts_retry.labels(**radio_traffic_labels).set(value.txRetryPkts)
-                    
-            
-    @staticmethod
-    def __update_radio_stats(radio_stats: list[Omada.Model.Ports.AccessPointRadioStats]):
-        for radio in radio_stats:
-            radio_labels = AccessPoint.get_labels(radio,access_point_radio_labels)
-            AccessPoint.radio_rx_rate.labels(**radio_labels).set(radio.rx)
-            AccessPoint.radio_tx_rate.labels(**radio_labels).set(radio.tx)
-            AccessPoint.radio_rx_retry_pkts_rate.labels(**radio_labels).set(radio.rxRetryPkts)
-            AccessPoint.radio_tx_retry_pkts_rate.labels(**radio_labels).set(radio.txRetryPkts)
