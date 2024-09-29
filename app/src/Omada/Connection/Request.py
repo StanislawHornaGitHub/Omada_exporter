@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 import requests
 import datetime
 import src.Omada.Connection.Auth as Auth
-import src.Omada.helpers.requestsResult as requestHelpers
 
 load_dotenv()
 
@@ -23,24 +22,24 @@ class Request:
 
     __page_size: int = 100
     __web_api_retry_limit: int = 2
-    
-
+    __open_api_retry_limit: int = 2
 
     @staticmethod
     def get(path: str, arguments: dict = {}, include_auth: bool = True, include_params: bool = True, page: int = 1):
         url = Request.__get_url(path, arguments)
-        
+
         if path.startswith("/api/") and path != "/api/info":
             return Request.get_method_web_api(url)
         elif path.startswith("/openapi/") or path == "/api/info":
-            return Request.get_method_openapi(url,include_auth,include_params)
-        
+            return Request.get_method_openapi(url, include_auth, include_params)
+
     @staticmethod
     def get_method_web_api(url: str) -> requests.Response:
-        
+
         retry_counter: int = 0
-        
-        while(retry_counter < Request.__web_api_retry_limit):
+
+        while (retry_counter < Request.__web_api_retry_limit):
+            retry_counter = retry_counter + 1
             session = Request.__user_session.get_session()
             response = session.get(
                 url=url,
@@ -48,31 +47,47 @@ class Request:
                     "_t": Request.__get_timestamp()
                 }
             )
-            try:
-                result: dict = requestHelpers.get_request_result(url, response)
+
+            code, result, msg = Request.__get_result(response)
+            if code == 0:
                 break
-            except requests.exceptions.JSONDecodeError:
+
+            if code == -1:
                 Request.__user_session.login()
-            except Exception:
-                pass
-            retry_counter = retry_counter + 1
-            
+
+        if code != 0:
+            raise Exception(msg)
+
         return result
 
     @staticmethod
     def get_method_openapi(
         url: str, include_auth: bool = True, include_params: bool = True, page: int = 1
     ) -> dict:
-        headers = Request.__get_headers(include_auth)
-        params = Request.__get_params(page, include_params)
-        
-        response = requests.get(
-            url,
-            headers=headers,
-            params=params,
-            verify=Request.__verify_certificate
-        )
-        result: dict = requestHelpers.get_request_result(url, response)
+
+        retry_counter: int = 0
+        while (retry_counter < Request.__open_api_retry_limit):
+            retry_counter = retry_counter + 1
+
+            headers = Request.__get_headers(include_auth)
+            params = Request.__get_params(page, include_params)
+
+            response = requests.get(
+                url,
+                headers=headers,
+                params=params,
+                verify=Request.__verify_certificate
+            )
+
+            code, result, msg = Request.__get_result(response)
+
+            if code == 0:
+                break
+            elif code in Auth.OpenAPI.TokenException.OmadaErrorCodes:
+                Auth.OpenAPI.request_token()
+
+        if code != 0:
+            raise Exception(msg)
 
         if Request.__has_data(result):
             if not Request.__has_more_data_to_fetch(result):
@@ -87,12 +102,12 @@ class Request:
 
     @staticmethod
     def post(path: str, arguments: dict = {}, body: dict = None):
-        url = Request.__get_url(path,arguments)
-        
+        url = Request.__get_url(path, arguments)
+
         if path.startswith("/api/") and path != "/api/info":
             return Request.__post_method_web_api(url, body)
         elif path.startswith("/openapi/") or path == "/api/info":
-            return Request.__post_method_openapi(url,body)
+            return Request.__post_method_openapi(url, body)
 
     @staticmethod
     def __post_method_openapi(url: str, body: dict = None):
@@ -102,10 +117,16 @@ class Request:
             )
         else:
             response = requests.post(
-                url=url, verify=Request.__verify_certificate)
+                url=url, verify=Request.__verify_certificate
+            )
 
-        return requestHelpers.get_request_result(url, response)
-    
+        code, result, msg = Request.__get_result(response)
+
+        if code != 0:
+            raise Exception(msg)
+
+        return result
+
     @staticmethod
     def __post_method_web_api(url, body):
 
@@ -114,15 +135,19 @@ class Request:
             url=url,
             json=body
         )
-        
-        return requestHelpers.get_request_result(url, response)
-        
-        
+
+        code, result, msg = Request.__get_result(response)
+
+        if code != 0:
+            raise Exception(msg)
+
+        return result
+
     @staticmethod
     def __get_url(path: str, arguments: dict = {}) -> str:
         if path.startswith("/api/") and path != "/api/info":
             path = "/{omadacId}" + path
-        
+
         arguments = {
             "omadacId": Request.omada_cid,
             "siteId": Request.site_id,
@@ -135,10 +160,7 @@ class Request:
             base=Request.__base_url,
             endpoint_path=path
         )
-        
 
-        
-        
     @staticmethod
     def __get_headers(include_auth_headers: bool = True) -> dict:
         if include_auth_headers:
@@ -179,6 +201,19 @@ class Request:
             return False
 
     @staticmethod
+    def __get_result(response: requests.Response) -> tuple[str, dict]:
+        try:
+            response_json: dict = response.json()
+        except:
+            response_json: dict = {}
+            response_json["errorCode"] = -1
+            response_json["msg"] = "Failed to parse JSON"
+
+        status_code: int = response_json.get("errorCode", 1)
+
+        return status_code, response_json.get("result", None), response_json.get("msg", None)
+
+    @staticmethod
     def init() -> None:
         api_info = Request.get(
             "/api/info", include_auth=False, include_params=False
@@ -187,7 +222,7 @@ class Request:
         Request.api_version = api_info.get("apiVer")
         Request.omada_cid = api_info.get("omadacId")
         Auth.OpenAPI.omada_cid = api_info.get("omadacId")
-        
+
         Request.__user_session = Auth.UserSession(
             username=os.getenv("OMADA_USER"),
             password=os.getenv("OMADA_USER_PASSWORD"),
@@ -200,11 +235,10 @@ class Request:
             for entry in site
             if entry.get("name") == os.getenv("SITE_NAME")
         ][0]
-        
+
     @staticmethod
     def close():
         del Request.__user_session
-        
 
 
 Request.init()

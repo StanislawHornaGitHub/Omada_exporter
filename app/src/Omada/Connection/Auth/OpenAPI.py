@@ -2,7 +2,6 @@ import os
 import datetime
 import requests
 from dotenv import load_dotenv
-import src.Omada.helpers.requestsResult as requestHelpers
 from src.Omada.Connection.Auth.BaseAuth import BaseAuth
 
 load_dotenv()
@@ -21,7 +20,7 @@ class OpenAPI(BaseAuth):
     @staticmethod
     def get_token() -> str:
         if not OpenAPI.__accessToken:
-            OpenAPI.__request_token()
+            OpenAPI.request_token()
             return OpenAPI.__accessToken
 
         if not OpenAPI.__is_token_expired():
@@ -43,7 +42,7 @@ class OpenAPI(BaseAuth):
         )
 
     @staticmethod
-    def __request_token() -> None:
+    def request_token() -> None:
         url: str = OpenAPI.get_url(OpenAPI.__path_get_token)
         body = {
             "omadacId": OpenAPI.omada_cid,
@@ -51,7 +50,11 @@ class OpenAPI(BaseAuth):
             "client_secret": OpenAPI.__client_secret
         }
         response: requests.Response = requests.post(url=url, json=body)
-        result: dict = requestHelpers.get_request_result(url, response)
+
+        code, result, msg = BaseAuth.get_result(response)
+
+        if code != 0:
+            raise Exception(msg)
 
         OpenAPI.__set_token_details(result)
 
@@ -65,16 +68,26 @@ class OpenAPI(BaseAuth):
                 "refresh_token": OpenAPI.__refreshToken
             }
         )
-        try:
-            response: requests.Request = requests.post(url)
-            result: dict = requestHelpers.get_request_result(url, response)
+        
+        response: requests.Request = requests.post(url)
+        
+        code, result, msg = BaseAuth.get_result(response)
 
+        if code == 0:
             OpenAPI.__set_token_details(result)
-        except:
-            OpenAPI.__request_token()
+        else:
+            OpenAPI.request_token()
 
     @staticmethod
     def __set_token_details(result: dict):
         OpenAPI.__accessToken = result.get("accessToken")
         OpenAPI.__refreshToken = result.get("refreshToken")
         OpenAPI.__set_expiration_time(result.get("expiresIn"))
+
+    class TokenException(Exception):
+        OmadaErrorCodes: list[int] = [
+            -44109,
+            -44110,
+            -44112,
+            -44113,
+        ]

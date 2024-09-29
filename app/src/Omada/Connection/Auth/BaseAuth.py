@@ -1,4 +1,5 @@
 import os
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -17,3 +18,16 @@ class BaseAuth:
             base_url=BaseAuth.__base_url,
             path=path
         )
+    
+    @staticmethod
+    def get_result(response: requests.Response) -> tuple[str, dict]:
+        try:
+            response_json: dict = response.json()
+        except:
+            response_json: dict = {}
+            response_json["errorCode"] = -1
+            response_json["msg"] = "Failed to parse JSON"
+
+        status_code: int = response_json.get("errorCode", 1)
+
+        return status_code, response_json.get("result", None), response_json.get("msg", None)
