@@ -1,15 +1,13 @@
-import os
 import requests
-from dotenv import load_dotenv
+import src.Config as Config
 
-load_dotenv()
 
 class BaseAuth:
-    __base_url: str = os.getenv("BASE_URL")
+    __base_url: str = Config.BASE_URL
     omada_cid: str = None
-    
+
     @staticmethod
-    def get_url(path: str, args: dict ={}) -> str:
+    def get_url(path: str, args: dict = {}) -> str:
         url: str = "{base_url}{path}"
         path: str = path.format(
             **args
@@ -18,7 +16,7 @@ class BaseAuth:
             base_url=BaseAuth.__base_url,
             path=path
         )
-    
+
     @staticmethod
     def get_result(response: requests.Response) -> tuple[str, dict]:
         try:

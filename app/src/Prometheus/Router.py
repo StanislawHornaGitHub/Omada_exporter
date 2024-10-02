@@ -1,6 +1,6 @@
 from prometheus_client import Gauge, Info
 import src.Omada as Omada
-from src.Prometheus.BaseClient import BaseDeviceMetrics
+from src.Prometheus.BaseClient import BaseDeviceMetrics, exporter_registry
 
 router_identity_labels = [
     "name",
@@ -24,28 +24,28 @@ router_port_info = [
 
 class Router(BaseDeviceMetrics):
     temp: Gauge = Gauge(
-        "router_temperature", "Router temperature in Celsius", ["name", "mac"]
+        "router_temperature", "Router temperature in Celsius", ["name", "mac"], registry=exporter_registry
     )
     port_rx: Gauge = Gauge(
-        "router_port_rx_sum", "Sum of received bytes", router_identity_labels
+        "router_port_rx_sum", "Sum of received bytes", router_identity_labels, registry=exporter_registry
     )
     port_tx: Gauge = Gauge(
-        "router_port_tx_sum", "Sum of transmitted bytes", router_identity_labels
+        "router_port_tx_sum", "Sum of transmitted bytes", router_identity_labels, registry=exporter_registry
     )
     port_loss: Gauge = Gauge(
-        "router_port_loss", "Percentage of packet loss on particular port", router_identity_labels
+        "router_port_loss", "Percentage of packet loss on particular port", router_identity_labels, registry=exporter_registry
     )
     port_latency: Gauge = Gauge(
-        "router_port_latency", "Latency in ms on particular port", router_identity_labels
+        "router_port_latency", "Latency in ms on particular port", router_identity_labels, registry=exporter_registry
     )
     port_info: Info = Info(
-        "router_port", "Router port information details", router_identity_labels
+        "router_port", "Router port information details", router_identity_labels, registry=exporter_registry
     )
     port_ipv4_config: Info = Info(
-        "router_port_ipv4_config", "Router port ipv4 config", router_identity_labels
+        "router_port_ipv4_config", "Router port ipv4 config", router_identity_labels, registry=exporter_registry
     )
     port_ipv6_config: Info = Info(
-        "router_port_ipv6_config", "Router port ipv6 config", router_identity_labels
+        "router_port_ipv6_config", "Router port ipv6 config", router_identity_labels, registry=exporter_registry
     )
 
 

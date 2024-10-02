@@ -1,5 +1,5 @@
 import src.Omada as Omada
-from prometheus_client import Gauge, Info
+from prometheus_client import Gauge, Info, CollectorRegistry
 import src.Omada.Model.Ports as Ports
 
 device_identity_labels = [
@@ -13,13 +13,15 @@ device_info = [
     "firmwareVersion"
 ]
 
+exporter_registry =CollectorRegistry()
 
 class BaseDeviceMetrics:
-    cpu_usage: Gauge = Gauge("cpu_usage", "CPU usage in %", device_identity_labels)
-    memory_usage: Gauge = Gauge("memory_usage", "Memory usage in %", device_identity_labels)
+
+    cpu_usage: Gauge = Gauge("cpu_usage", "CPU usage in %", device_identity_labels,registry=exporter_registry)
+    memory_usage: Gauge = Gauge("memory_usage", "Memory usage in %", device_identity_labels,registry=exporter_registry)
     
     info: Info = Info(
-        "device", "Device information", device_identity_labels
+        "device", "Device information", device_identity_labels, registry=exporter_registry
     )
 
     @staticmethod

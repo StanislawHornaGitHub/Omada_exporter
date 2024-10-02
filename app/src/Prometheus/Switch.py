@@ -1,6 +1,6 @@
 from prometheus_client import Gauge, Info
 import src.Omada as Omada
-from src.Prometheus.BaseClient import BaseDeviceMetrics
+from src.Prometheus.BaseClient import BaseDeviceMetrics, exporter_registry
 
 switch_identity_labels = [
     "name",
@@ -21,34 +21,34 @@ switch_port_info = [
 
 class Switch(BaseDeviceMetrics):
     port_rx: Gauge = Gauge(
-        "switch_port_rx_sum", "Sum of received bytes", switch_identity_labels
+        "switch_port_rx_sum", "Sum of received bytes", switch_identity_labels, registry=exporter_registry
     )
     port_tx: Gauge = Gauge(
-        "switch_port_tx_sum", "Sum of transmitted bytes", switch_identity_labels
+        "switch_port_tx_sum", "Sum of transmitted bytes", switch_identity_labels, registry=exporter_registry
     )
     port_rx_rate: Gauge = Gauge(
-        "switch_port_rx_rate", "Received bytes per second", switch_identity_labels
+        "switch_port_rx_rate", "Received bytes per second", switch_identity_labels, registry=exporter_registry
     )
     port_tx_rate: Gauge = Gauge(
-        "switch_port_tx_rate", "Transmitted bytes per second", switch_identity_labels
+        "switch_port_tx_rate", "Transmitted bytes per second", switch_identity_labels, registry=exporter_registry
     )
     port_info: Info = Info(
-        "switch_port", "Switch port information details", switch_identity_labels
+        "switch_port", "Switch port information details", switch_identity_labels, registry=exporter_registry
     )
     port_rx_pkts: Gauge = Gauge(
-        "switch_port_rx_pkts", "Received packets", switch_identity_labels
+        "switch_port_rx_pkts", "Received packets", switch_identity_labels, registry=exporter_registry
     )
     port_tx_pkts: Gauge = Gauge(
-        "switch_port_tx_pkts", "Transmitted packets", switch_identity_labels
+        "switch_port_tx_pkts", "Transmitted packets", switch_identity_labels, registry=exporter_registry
     )
     port_rx_err_pkts: Gauge = Gauge(
-        "switch_port_rx_err_pkts", "Received packets errors", switch_identity_labels
+        "switch_port_rx_err_pkts", "Received packets errors", switch_identity_labels, registry=exporter_registry
     )
     port_tx_err_pkts: Gauge = Gauge(
-        "switch_port_tx_err_pkts", "Transmitted packets errors", switch_identity_labels
+        "switch_port_tx_err_pkts", "Transmitted packets errors", switch_identity_labels, registry=exporter_registry
     )
     port_drop_pkts: Gauge = Gauge(
-        "switch_drop_pkts", "Dropped packets", switch_identity_labels
+        "switch_drop_pkts", "Dropped packets", switch_identity_labels, registry=exporter_registry
     )
 
     @staticmethod
