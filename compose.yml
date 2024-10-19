@@ -1,17 +1,17 @@
 services:
   Omada_exporter:
-      image: ${IMAGE_NAME}
-      build:
-        context: ./
-        dockerfile: Dockerfile
-      container_name: ${CONTAINER_NAME}
-      hostname: ${HOSTNAME}
-      restart: unless-stopped
-      ports:
-        - ${EXTERNAL_PORT}:8000
-      healthcheck:
-        test: curl --fail http://${HOSTNAME}:8000/healthcheck
-        start_period: 2s
-        interval: 3s
-        timeout: 1s
-        retries: 5
+    image: ${IMAGE_NAME}
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: ${CONTAINER_NAME}
+    hostname: ${HOSTNAME}
+    restart: unless-stopped
+    ports:
+      - ${EXTERNAL_PORT}:8000
+    healthcheck:
+      test: curl --fail http://${HOSTNAME}:8000/healthcheck
+      start_period: 30s
+      interval: 1m
+      timeout: 1s
+      retries: 5

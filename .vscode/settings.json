@@ -1,15 +1,21 @@
 {
-    "cSpell.words": [
-        "dotenv",
-        "fastapi",
-        "healthcheck",
-        "OMADA",
-        "omadac",
-        "Pkts",
-        "pvid",
-        "pydantic",
-        "rssi",
-        "timespan",
-        "uvicorn"
-    ]
+  "cSpell.words": [
+    "appmetrics",
+    "dotenv",
+    "fastapi",
+    "healthcheck",
+    "Instrumentator",
+    "Instrumentor",
+    "OMADA",
+    "omadac",
+    "opentelemetry",
+    "otlp",
+    "Pkts",
+    "pvid",
+    "pydantic",
+    "rssi",
+    "semconv",
+    "timespan",
+    "uvicorn"
+  ]
 }
