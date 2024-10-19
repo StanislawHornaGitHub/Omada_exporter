@@ -12,17 +12,10 @@ def get_health():
     headers = get_response_headers()
     try:
         status: Model.HealthCheck = Controller.HealthCheck.get_status()
-        response = Response(
-            content=status.model_dump_json(indent=4),
-            headers=headers
-        )
+        response = Response(content=status.model_dump_json(indent=4), headers=headers)
     except Exception as e:
         logger.exception(e, exc_info=True)
-        raise HTTPException(
-            status_code=500,
-            detail=headers,
-            headers=headers
-        )
+        raise HTTPException(status_code=500, detail=headers, headers=headers)
     else:
         set_current_span_status()
         return response

@@ -18,15 +18,9 @@ class PrometheusMetrics:
         get_current_span()
         errors: set[bool] = set()
 
-        errors.add(
-            not PrometheusMetrics.__update_switch_metrics()
-        )
-        errors.add(
-            not PrometheusMetrics.__update_router_metrics()
-        )
-        errors.add(
-            not PrometheusMetrics.__update_access_point_metrics()
-        )
+        errors.add(not PrometheusMetrics.__update_switch_metrics())
+        errors.add(not PrometheusMetrics.__update_router_metrics())
+        errors.add(not PrometheusMetrics.__update_access_point_metrics())
 
         if False not in errors:
             raise Exception("Failed to update Prometheus metrics")

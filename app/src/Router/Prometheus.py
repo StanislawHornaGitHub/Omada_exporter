@@ -15,20 +15,15 @@ def get_metrics():
         response = Response(
             content=generate_latest(Controller.PrometheusMetrics.registry),
             media_type="text/plain",
-            headers={
-                "trace_id": get_trace_id()
-            }
+            headers={"trace_id": get_trace_id()},
         )
     except Exception as e:
-        logger.exception(e,exc_info=True)
-        raise HTTPException(
-            status_code=500,
-            detail=headers,
-            headers=headers
-        )
+        logger.exception(e, exc_info=True)
+        raise HTTPException(status_code=500, detail=headers, headers=headers)
     else:
         set_current_span_status()
         return response
+
 
 @Prometheus_router.get(path="/appmetrics")
 def get_app_metrics():
@@ -36,17 +31,11 @@ def get_app_metrics():
     headers = get_response_headers()
     try:
         response = Response(
-            content=generate_latest(),
-            media_type="text/plain",
-            headers=headers
+            content=generate_latest(), media_type="text/plain", headers=headers
         )
     except Exception as e:
-        logger.exception(e,exc_info=True)
-        raise HTTPException(
-            status_code=500,
-            detail=headers,
-            headers=headers
-        )
+        logger.exception(e, exc_info=True)
+        raise HTTPException(status_code=500, detail=headers, headers=headers)
     else:
         set_current_span_status()
         return response

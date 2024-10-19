@@ -10,9 +10,5 @@ app.include_router(Router.HealthCheck)
 opentelemetry_instrument(app)
 prometheus_instrument(app)
 
-if __name__ == '__main__':
-    uvicorn.run(
-        app, 
-        host="0.0.0.0", 
-        port=8000
-    )
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -9,9 +9,15 @@ tracer = trace.get_tracer("AccessPoint-tracer")
 
 class AccessPoint:
     __access_point_info_path: str = "/openapi/v1/{omadacId}/sites/{siteId}/aps/{apMac}"
-    __access_point_port_info_path: str = "/openapi/v1/{omadacId}/sites/{siteId}/aps/{apMac}/wired-uplink"
-    __access_point_radio_info_path: str = "/openapi/v1/{omadacId}/sites/{siteId}/aps/{apMac}/radios"
-    __access_point_radio_stats_path: str = "/api/v2/sites/{siteId}/stat/{apMac}/5min?type=ap"
+    __access_point_port_info_path: str = (
+        "/openapi/v1/{omadacId}/sites/{siteId}/aps/{apMac}/wired-uplink"
+    )
+    __access_point_radio_info_path: str = (
+        "/openapi/v1/{omadacId}/sites/{siteId}/aps/{apMac}/radios"
+    )
+    __access_point_radio_stats_path: str = (
+        "/api/v2/sites/{siteId}/stat/{apMac}/5min?type=ap"
+    )
 
     @staticmethod
     @tracer.start_as_current_span("AccessPoint.get_info")
@@ -22,33 +28,22 @@ class AccessPoint:
         error: bool = False
         logger.info(
             "Getting AccessPoint info",
-            extra={
-                "devices": [item.mac for item in Devices.access_points]
-            }
+            extra={"devices": [item.mac for item in Devices.access_points]},
         )
 
         for ap in Devices.access_points:
             try:
                 ap_info: dict = Connection.Request.get(
-                    AccessPoint.__access_point_info_path, {
-                        "apMac": ap.mac
-                    }
+                    AccessPoint.__access_point_info_path, {"apMac": ap.mac}
                 )
-                ap_object = Model.AccessPoint(
-                    **ap_info
-                )
-                ap_devices.append(
-                    ap_object
-                )
+                ap_object = Model.AccessPoint(**ap_info)
+                ap_devices.append(ap_object)
             except Exception as e:
                 error = True
                 logger.exception(
                     e,
                     exc_info=True,
-                    extra={
-                        "access_point_name": ap.name,
-                        "access_point_mac": ap.mac
-                    }
+                    extra={"access_point_name": ap.name, "access_point_mac": ap.mac},
                 )
 
         set_current_span_status(error)
@@ -66,26 +61,19 @@ class AccessPoint:
             "Getting AccessPoint port info for {num} APs".format(
                 num=len(Devices.access_points)
             ),
-            extra={
-                "devices": [item.mac for item in Devices.access_points]
-            }
+            extra={"devices": [item.mac for item in Devices.access_points]},
         )
         for ap in Devices.access_points:
             try:
                 ap_port_response: dict = Connection.Request.get(
-                    AccessPoint.__access_point_port_info_path, {
-                        "apMac": ap.mac
-                    }
+                    AccessPoint.__access_point_port_info_path, {"apMac": ap.mac}
                 )
             except Exception as e:
                 error = True
                 logger.exception(
                     e,
                     exc_info=True,
-                    extra={
-                        "access_point_name": ap.name,
-                        "access_point_mac": ap.mac
-                    }
+                    extra={"access_point_name": ap.name, "access_point_mac": ap.mac},
                 )
                 continue
 
@@ -97,27 +85,18 @@ class AccessPoint:
                         **ap_port_response.get("wiredUplink"),
                     }
                 )
-                access_point_port.append(
-                    ap_port_object
-                )
+                access_point_port.append(ap_port_object)
             except Exception as e:
                 error = True
                 logger.warning(
                     e,
                     exc_info=True,
-                    extra={
-                        "access_point_name": ap.name,
-                        "access_point_mac": ap.mac
-                    }
+                    extra={"access_point_name": ap.name, "access_point_mac": ap.mac},
                 )
 
         logger.info(
-            "Found {num} AccessPoint ports".format(
-                num=len(access_point_port)
-            ),
-            extra={
-                "devices": [item.mac for item in Devices.access_points]
-            }
+            "Found {num} AccessPoint ports".format(num=len(access_point_port)),
+            extra={"devices": [item.mac for item in Devices.access_points]},
         )
         set_current_span_status(error)
         return access_point_port
@@ -133,27 +112,20 @@ class AccessPoint:
             "Getting AccessPoint radio info for {num} APs".format(
                 num=len(Devices.access_points)
             ),
-            extra={
-                "devices": [item.mac for item in Devices.access_points]
-            }
+            extra={"devices": [item.mac for item in Devices.access_points]},
         )
 
         for ap in Devices.access_points:
             try:
                 ap_radio_response: dict = Connection.Request.get(
-                    AccessPoint.__access_point_radio_info_path, {
-                        "apMac": ap.mac
-                    }
+                    AccessPoint.__access_point_radio_info_path, {"apMac": ap.mac}
                 )
             except Exception as e:
                 error = True
                 logger.exception(
                     e,
                     exc_info=True,
-                    extra={
-                        "access_point_name": ap.name,
-                        "access_point_mac": ap.mac
-                    }
+                    extra={"access_point_name": ap.name, "access_point_mac": ap.mac},
                 )
                 continue
 
@@ -165,25 +137,16 @@ class AccessPoint:
                         **ap_radio_response,
                     }
                 )
-                access_point_radio.append(
-                    ap_radio_object
-                )
+                access_point_radio.append(ap_radio_object)
             except Exception as e:
                 logger.warning(
                     e,
                     exc_info=True,
-                    extra={
-                        "access_point_name": ap.name,
-                        "access_point_mac": ap.mac
-                    }
+                    extra={"access_point_name": ap.name, "access_point_mac": ap.mac},
                 )
         logger.info(
-            "Found {num} AccessPoint radios".format(
-                num=len(access_point_radio)
-            ),
-            extra={
-                "devices": [item.mac for item in Devices.access_points]
-            }
+            "Found {num} AccessPoint radios".format(num=len(access_point_radio)),
+            extra={"devices": [item.mac for item in Devices.access_points]},
         )
         set_current_span_status(error)
         return access_point_radio

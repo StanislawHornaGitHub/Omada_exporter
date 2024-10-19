@@ -27,13 +27,19 @@ class Request:
 
     @staticmethod
     @tracer.start_as_current_span("Request.get")
-    def get(path: str, arguments: dict = {}, include_auth: bool = True, include_params: bool = True, page: int = 1):
+    def get(
+        path: str,
+        arguments: dict = {},
+        include_auth: bool = True,
+        include_params: bool = True,
+        page: int = 1,
+    ):
         extra_data = {
             "path": path,
             "arguments": arguments,
             "include_auth": include_auth,
             "include_params": include_params,
-            "page": page
+            "page": page,
         }
 
         current_span = get_current_span()
@@ -53,9 +59,7 @@ class Request:
 
             response = Request.get_method_web_api(url)
         elif path.startswith("/openapi/") or path == "/api/info":
-            response = Request.get_method_openapi(
-                url, include_auth, include_params
-            )
+            response = Request.get_method_openapi(url, include_auth, include_params)
 
         set_current_span_status()
         return response
@@ -63,9 +67,7 @@ class Request:
     @staticmethod
     @tracer.start_as_current_span("Request.get_method_web_api")
     def get_method_web_api(url: str) -> requests.Response:
-        extra_data = {
-            "url": url
-        }
+        extra_data = {"url": url}
         logger.info("Get method on Web API invoked", extra=extra_data)
 
         current_span = get_current_span()
@@ -74,19 +76,14 @@ class Request:
 
         retry_counter: int = 0
 
-        while (retry_counter < Request.__web_api_retry_limit):
-            current_span.set_attribute(
-                SpanAttributes.HTTP_RETRY_COUNT, retry_counter
-            )
+        while retry_counter < Request.__web_api_retry_limit:
+            current_span.set_attribute(SpanAttributes.HTTP_RETRY_COUNT, retry_counter)
 
             retry_counter = retry_counter + 1
             session = Request.__user_session.get_session()
             try:
                 response = session.get(
-                    url=url,
-                    params={
-                        "_t": Request.__get_timestamp()
-                    }
+                    url=url, params={"_t": Request.__get_timestamp()}
                 )
             except Exception as e:
                 logger.exception(e, exc_info=True, extra=extra_data)
@@ -102,7 +99,8 @@ class Request:
 
             if code == -1:
                 logger.warning(
-                    "Web API call was not successful, trying to re-login", extra=extra_data
+                    "Web API call was not successful, trying to re-login",
+                    extra=extra_data,
                 )
                 Request.__user_session.login()
 
@@ -122,7 +120,7 @@ class Request:
             "url": url,
             "include_auth": include_auth,
             "include_params": include_params,
-            "page": page
+            "page": page,
         }
         logger.info("Get method on Open API invoked", extra=extra_data)
 
@@ -131,10 +129,8 @@ class Request:
         current_span.set_attribute(SpanAttributes.URL_FULL, url)
 
         retry_counter: int = 0
-        while (retry_counter < Request.__open_api_retry_limit):
-            current_span.set_attribute(
-                SpanAttributes.HTTP_RETRY_COUNT, retry_counter
-            )
+        while retry_counter < Request.__open_api_retry_limit:
+            current_span.set_attribute(SpanAttributes.HTTP_RETRY_COUNT, retry_counter)
 
             retry_counter = retry_counter + 1
 
@@ -146,7 +142,7 @@ class Request:
                     url,
                     headers=headers,
                     params=params,
-                    verify=Request.__verify_certificate
+                    verify=Request.__verify_certificate,
                 )
             except Exception as e:
                 logger.exception(e, exc_info=True, extra=extra_data)
@@ -165,7 +161,7 @@ class Request:
                     "Open API call was not successful ({errCode}), trying, to request new token".format(
                         errCode=code
                     ),
-                    extra=extra_data
+                    extra=extra_data,
                 )
                 Auth.OpenAPI.request_token()
 
@@ -177,16 +173,15 @@ class Request:
             logger.info("Result contains data", extra=extra_data)
             if not Request.__has_more_data_to_fetch(result):
                 logger.info(
-                    "Result has no more data to download, returning the result", extra=extra_data
+                    "Result has no more data to download, returning the result",
+                    extra=extra_data,
                 )
                 current_span.set_status(status=trace.StatusCode(1))
                 return result.get("data")
 
             logger.info("Result has more data to download", extra=extra_data)
             result = result.get("data")
-            result += Request.get(
-                url, include_auth, include_params, page+1
-            )
+            result += Request.get(url, include_auth, include_params, page + 1)
 
         set_current_span_status()
         return result
@@ -194,11 +189,7 @@ class Request:
     @staticmethod
     @tracer.start_as_current_span("Request.post")
     def post(path: str, arguments: dict = {}, body: dict = None):
-        extra_data = {
-            "path": path,
-            "arguments": arguments,
-            "body": body
-        }
+        extra_data = {"path": path, "arguments": arguments, "body": body}
         logger.info("Post method invoked", extra=extra_data)
         current_span = get_current_span()
         current_span.set_attribute(SpanAttributes.HTTP_METHOD, "POST")
@@ -226,10 +217,7 @@ class Request:
     @staticmethod
     @tracer.start_as_current_span("Request.post_method_openapi")
     def post_method_openapi(url: str, body: dict = None):
-        extra_data = {
-            "url": url,
-            "body": body
-        }
+        extra_data = {"url": url, "body": body}
         logger.info("Post method on Open API invoked", extra=extra_data)
         current_span = get_current_span()
         current_span.set_attribute(SpanAttributes.HTTP_METHOD, "POST")
@@ -240,9 +228,7 @@ class Request:
                 url=url, json=body, verify=Request.__verify_certificate
             )
         else:
-            response = requests.post(
-                url=url, verify=Request.__verify_certificate
-            )
+            response = requests.post(url=url, verify=Request.__verify_certificate)
 
         current_span.set_attribute(
             SpanAttributes.HTTP_STATUS_CODE, response.status_code
@@ -260,20 +246,14 @@ class Request:
     @staticmethod
     @tracer.start_as_current_span("Request.post_method_web_api")
     def post_method_web_api(url, body):
-        extra_data = {
-            "url": url,
-            "body": body
-        }
+        extra_data = {"url": url, "body": body}
         logger.info("Post method on Web API invoked", extra=extra_data)
         current_span = get_current_span()
         current_span.set_attribute(SpanAttributes.HTTP_METHOD, "POST")
         current_span.set_attribute(SpanAttributes.URL_FULL, url)
 
         session = Request.__user_session.get_session()
-        response = session.post(
-            url=url,
-            json=body
-        )
+        response = session.post(url=url, json=body)
 
         current_span.set_attribute(
             SpanAttributes.HTTP_STATUS_CODE, response.status_code
@@ -295,14 +275,11 @@ class Request:
         arguments = {
             "omadacId": Request.omada_cid,
             "siteId": Request.site_id,
-            **arguments
+            **arguments,
         }
-        path: str = path.format(
-            **arguments
-        )
+        path: str = path.format(**arguments)
         return "{base}{endpoint_path}".format(
-            base=Request.__base_url,
-            endpoint_path=path
+            base=Request.__base_url, endpoint_path=path
         )
 
     @staticmethod
@@ -312,17 +289,14 @@ class Request:
                 "Authorization": "AccessToken={token}".format(
                     token=Auth.OpenAPI.get_token()
                 ),
-                "content-type": "application/json"
+                "content-type": "application/json",
             }
         return None
 
     @staticmethod
     def __get_params(page: int = 1, include_params: bool = True) -> dict:
         if include_params:
-            return {
-                "pageSize": Request.__page_size,
-                "page": page
-            }
+            return {"pageSize": Request.__page_size, "page": page}
         return None
 
     @staticmethod
@@ -335,12 +309,12 @@ class Request:
 
     @staticmethod
     def __has_more_data_to_fetch(result: dict) -> bool:
-        return (Request.__get_fetched_rows(result) < result.get("totalRows"))
+        return Request.__get_fetched_rows(result) < result.get("totalRows")
 
     @staticmethod
     def __has_data(result: dict) -> bool:
         try:
-            return ('data' in list(result.keys()))
+            return "data" in list(result.keys())
         except:
             return False
 
@@ -355,14 +329,16 @@ class Request:
 
         status_code: int = response_json.get("errorCode", 1)
 
-        return status_code, response_json.get("result", None), response_json.get("msg", None)
+        return (
+            status_code,
+            response_json.get("result", None),
+            response_json.get("msg", None),
+        )
 
     @staticmethod
     @tracer.start_as_current_span("Request.init")
     def init() -> None:
-        logger.info(
-            "Requests module initialization started"
-        )
+        logger.info("Requests module initialization started")
         get_current_span()
         error: bool = False
 
@@ -376,10 +352,7 @@ class Request:
             logger.exception(e, exc_info=True)
         else:
             logger.info(
-                "Omada API info fetched successfully",
-                exc_info={
-                    "api_info": api_info
-                }
+                "Omada API info fetched successfully", exc_info={"api_info": api_info}
             )
 
         try:
@@ -398,7 +371,7 @@ class Request:
                 Request.__user_session = Auth.UserSession(
                     username=Config.OMADA_USER,
                     password=Config.OMADA_USER_PASSWORD,
-                    omada_cid=Request.omada_cid
+                    omada_cid=Request.omada_cid,
                 )
             except Exception as e:
                 error = True
@@ -419,12 +392,9 @@ class Request:
         else:
             logger.info(
                 "Site {name} selected successfully ({site_id})".format(
-                    name=Config.SITE_NAME,
-                    site_id=Request.site_id
+                    name=Config.SITE_NAME, site_id=Request.site_id
                 ),
-                exc_info={
-                    "available_sites": site
-                }
+                exc_info={"available_sites": site},
             )
 
         set_current_span_status(error)

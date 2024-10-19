@@ -36,15 +36,10 @@ class UserSession:
         self.__logout()
 
     def is_logged_in(self):
-        url = self.__is_logged_in_endpoint.format(
-            base_url=self.__base_url
-        )
+        url = self.__is_logged_in_endpoint.format(base_url=self.__base_url)
         try:
             response: dict = self.session.get(
-                url=url,
-                params={
-                    "_t": int(datetime.datetime.now().timestamp() * 1000)
-                }
+                url=url, params={"_t": int(datetime.datetime.now().timestamp() * 1000)}
             ).json()
         except:
             return False
@@ -56,18 +51,16 @@ class UserSession:
     def login(self):
         logger.info("Trying to login")
         url = self.__login_endpoint.format(
-            base_url=self.__base_url,
-            omadacId=self.omada_cid
+            base_url=self.__base_url, omadacId=self.omada_cid
         )
         try:
             response = self.session.post(
-                url,
-                json={'username': self.username, 'password': self.password}
+                url, json={"username": self.username, "password": self.password}
             )
             self.__login_result = response.json()
             self.session.headers.update(
                 {
-                    "Csrf-Token":  self.__login_result["result"]['token'],
+                    "Csrf-Token": self.__login_result["result"]["token"],
                 }
             )
             logger.info("Logged in successfully")
@@ -76,27 +69,19 @@ class UserSession:
 
     def __logout(self):
         url = self.__logout_endpoint.format(
-            base_url=self.__base_url,
-            omadacId=self.omada_cid
+            base_url=self.__base_url, omadacId=self.omada_cid
         )
-        t = self.session.post(
-            url
-        )
+        t = self.session.post(url)
 
         result = t.json()
         return result
-    
+
     def get_session(self) -> requests.Session:
 
-        logger.info(
-            "Getting user session for user {name}".format(
-                name=self.username
-            )
-        )
+        logger.info("Getting user session for user {name}".format(name=self.username))
 
         if self.is_logged_in() is not True:
             logger.warning("UserSession is not logged in")
             self.login()
-            
 
         return self.session

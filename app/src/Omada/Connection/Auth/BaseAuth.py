@@ -9,13 +9,8 @@ class BaseAuth:
     @staticmethod
     def get_url(path: str, args: dict = {}) -> str:
         url: str = "{base_url}{path}"
-        path: str = path.format(
-            **args
-        )
-        return url.format(
-            base_url=BaseAuth.__base_url,
-            path=path
-        )
+        path: str = path.format(**args)
+        return url.format(base_url=BaseAuth.__base_url, path=path)
 
     @staticmethod
     def get_result(response: requests.Response) -> tuple[str, dict]:
@@ -28,4 +23,8 @@ class BaseAuth:
 
         status_code: int = response_json.get("errorCode", 1)
 
-        return status_code, response_json.get("result", None), response_json.get("msg", None)
+        return (
+            status_code,
+            response_json.get("result", None),
+            response_json.get("msg", None),
+        )

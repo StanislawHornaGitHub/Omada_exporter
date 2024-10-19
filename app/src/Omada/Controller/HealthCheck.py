@@ -4,8 +4,9 @@ from src.Observability import *
 
 tracer = trace.get_tracer("HealthCheck-tracer")
 
+
 class HealthCheck:
-    
+
     __controller_name: str = ""
     __controller_version: str = ""
 
@@ -13,9 +14,9 @@ class HealthCheck:
 
     @staticmethod
     @tracer.start_as_current_span("HealthCheck.get")
-    def get() -> dict[str,str]:
+    def get() -> dict[str, str]:
         get_current_span()
-        
+
         try:
             result = {
                 "UserSession": HealthCheck.__test_web_api_endpoint(),
@@ -24,7 +25,7 @@ class HealthCheck:
                 "ControllerVersion": HealthCheck.__controller_version,
             }
         except Exception as e:
-            logger.exception(e,exc_info=True)
+            logger.exception(e, exc_info=True)
             raise e
         else:
             set_current_span_status()
@@ -36,11 +37,9 @@ class HealthCheck:
     def __test_web_api_endpoint() -> str:
         current_span = trace.get_current_span()
         current_span.set_status(status=trace.StatusCode(2))
-        
+
         try:
-            result: dict = Connection.Request.get(
-                HealthCheck.__web_api_endpoint
-            )
+            result: dict = Connection.Request.get(HealthCheck.__web_api_endpoint)
             HealthCheck.__controller_name = result.get("name")
             HealthCheck.__controller_version = result.get("controllerVersion")
             current_span.set_status(status=trace.StatusCode(1))
@@ -53,7 +52,7 @@ class HealthCheck:
     @tracer.start_as_current_span("HealthCheck.__test_open_api_endpoint")
     def __test_open_api_endpoint() -> str:
         get_current_span()
-        
+
         try:
             Devices.get_list()
         except:
