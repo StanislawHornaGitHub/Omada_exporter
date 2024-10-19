@@ -199,7 +199,7 @@
                         "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
                     },
                     "editorMode": "code",
-                    "expr": "sum(increase(radio_rx_sum[$increase_interval]) + increase(radio_tx_sum[$increase_interval]))",
+                    "expr": "sum(rate(radio_rx_sum[$increase_interval]) + rate(radio_tx_sum[$increase_interval])) /8",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -271,7 +271,7 @@
             },
             "gridPos": {
                 "h": 10,
-                "w": 10,
+                "w": 13,
                 "x": 0,
                 "y": 5
             },
@@ -465,8 +465,8 @@
             },
             "gridPos": {
                 "h": 10,
-                "w": 14,
-                "x": 10,
+                "w": 11,
+                "x": 13,
                 "y": 5
             },
             "id": 3,
@@ -599,7 +599,7 @@
                         "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
                     },
                     "editorMode": "code",
-                    "expr": "sum(increase(radio_rx_sum{frequency=\"5 GHz\"}[$increase_interval]) + increase(radio_tx_sum{frequency=\"5 GHz\"}[$increase_interval]))",
+                    "expr": "sum(rate(radio_rx_sum{frequency=\"5 GHz\"}[$increase_interval]) + rate(radio_tx_sum{frequency=\"5 GHz\"}[$increase_interval])) /8",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -665,7 +665,7 @@
                         "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
                     },
                     "editorMode": "code",
-                    "expr": "sum(increase(radio_rx_sum{frequency=\"2.4 GHz\"}[$increase_interval]) + increase(radio_tx_sum{frequency=\"2.4 GHz\"}[$increase_interval]))",
+                    "expr": "sum(rate(radio_rx_sum{frequency=\"2.4 GHz\"}[$increase_interval]) + rate(radio_tx_sum{frequency=\"2.4 GHz\"}[$increase_interval]))/8",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -741,7 +741,7 @@
                 "x": 0,
                 "y": 20
             },
-            "id": 4,
+            "id": 11,
             "options": {
                 "legend": {
                     "calcs": [
@@ -766,14 +766,14 @@
                         "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
                     },
                     "editorMode": "code",
-                    "expr": "increase(radio_rx_sum[$increase_interval]) + increase(radio_tx_sum[$increase_interval])",
+                    "expr": "rate(radio_tx_sum[$increase_interval])/8",
                     "instant": false,
                     "legendFormat": "{{name}}-{{frequency}}",
                     "range": true,
                     "refId": "A"
                 }
             ],
-            "title": "Rate",
+            "title": "Radio TX",
             "type": "timeseries"
         },
         {
@@ -831,6 +831,106 @@
                                 "value": 80
                             }
                         ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 11,
+                "w": 24,
+                "x": 0,
+                "y": 31
+            },
+            "id": 4,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "editorMode": "code",
+                    "expr": "rate(radio_rx_sum[$increase_interval]) /8",
+                    "instant": false,
+                    "legendFormat": "{{name}}-{{frequency}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Radio RX",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
                     }
                 },
                 "overrides": []
@@ -839,7 +939,7 @@
                 "h": 12,
                 "w": 24,
                 "x": 0,
-                "y": 31
+                "y": 42
             },
             "id": 8,
             "options": {
@@ -924,8 +1024,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -941,7 +1040,7 @@
                 "h": 18,
                 "w": 24,
                 "x": 0,
-                "y": 43
+                "y": 54
             },
             "id": 1,
             "options": {
@@ -1021,8 +1120,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -1064,17 +1162,29 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 185
+                                "value": 154
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "model"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 137
                             }
                         ]
                     }
                 ]
             },
             "gridPos": {
-                "h": 10,
-                "w": 18,
+                "h": 11,
+                "w": 10,
                 "x": 0,
-                "y": 61
+                "y": 72
             },
             "id": 5,
             "options": {
@@ -1139,6 +1249,106 @@
                 }
             ],
             "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 11,
+                "w": 14,
+                "x": 10,
+                "y": 72
+            },
+            "id": 12,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right",
+                    "showLegend": false
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "editorMode": "code",
+                    "expr": "sum(rate(radio_rx_sum[$increase_interval]) + rate(radio_tx_sum[$increase_interval]))/8",
+                    "instant": false,
+                    "legendFormat": "Radio Throughput",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Radio Throughput",
+            "type": "timeseries"
         }
     ],
     "schemaVersion": 39,
@@ -1169,13 +1379,13 @@
         ]
     },
     "time": {
-        "from": "now-1h",
+        "from": "now-6h",
         "to": "now"
     },
     "timepicker": {},
     "timezone": "browser",
     "title": "AccessPoint",
     "uid": "bdwa3qd4rwidce",
-    "version": 8,
+    "version": 2,
     "weekStart": ""
 }

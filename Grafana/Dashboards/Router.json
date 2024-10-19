@@ -193,7 +193,7 @@
                         "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
                     },
                     "editorMode": "code",
-                    "expr": "sum(increase(router_port_tx_sum[$increase_interval]) + increase(router_port_rx_sum[$increase_interval]))",
+                    "expr": "sum(rate(router_port_tx_sum[$increase_interval]) + rate(router_port_rx_sum[$increase_interval])) /8",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -1541,7 +1541,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(router_port_tx_sum{port=\"1\"}[$increase_interval]) + increase(router_port_rx_sum{port=\"1\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"1\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(router_port_tx_sum{port=\"1\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"1\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"1\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -1623,7 +1623,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(router_port_tx_sum{port=\"2\"}[$increase_interval]) + increase(router_port_rx_sum{port=\"2\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"2\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(router_port_tx_sum{port=\"2\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"2\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"2\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -1705,7 +1705,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(router_port_tx_sum{port=\"3\"}[$increase_interval]) + increase(router_port_rx_sum{port=\"3\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"3\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(router_port_tx_sum{port=\"3\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"3\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"3\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -1787,7 +1787,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(router_port_tx_sum{port=\"4\"}[$increase_interval]) + increase(router_port_rx_sum{port=\"4\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"4\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(router_port_tx_sum{port=\"4\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"4\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"4\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -1869,7 +1869,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(router_port_tx_sum{port=\"5\"}[$increase_interval]) + increase(router_port_rx_sum{port=\"5\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"5\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(router_port_tx_sum{port=\"5\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"5\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"5\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -1951,7 +1951,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(router_port_tx_sum{port=\"6\"}[$increase_interval]) + increase(router_port_rx_sum{port=\"6\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"6\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(router_port_tx_sum{port=\"6\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"6\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"6\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -2033,7 +2033,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(router_port_tx_sum{port=\"7\"}[$increase_interval]) + increase(router_port_rx_sum{port=\"7\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"7\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(router_port_tx_sum{port=\"7\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"7\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"7\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -2115,7 +2115,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(router_port_tx_sum{port=\"8\"}[$increase_interval]) + increase(router_port_rx_sum{port=\"8\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"8\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(router_port_tx_sum{port=\"8\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"8\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"8\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -2127,6 +2127,207 @@
             ],
             "title": "Rate port 8",
             "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 11,
+                "w": 24,
+                "x": 0,
+                "y": 22
+            },
+            "id": 29,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "editorMode": "code",
+                    "expr": "(\n  (rate(router_port_tx_sum[$increase_interval]))\n  * on (port) group_left(portDesc, mode)\n  (router_port_info{linkSpeed!=\"Down\"} == 1)\n) /8",
+                    "instant": false,
+                    "legendFormat": "{{mode}}-{{portDesc}} port: {{port}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Router Port TX",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 11,
+                "w": 24,
+                "x": 0,
+                "y": 33
+            },
+            "id": 30,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "editorMode": "code",
+                    "expr": "(\n  (rate(router_port_rx_sum[$increase_interval]))\n  * on (port) group_left(portDesc, mode)\n  (router_port_info{linkSpeed!=\"Down\"} == 1)\n) /8",
+                    "instant": false,
+                    "legendFormat": "{{mode}}-{{portDesc}} port: {{port}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Router Port RX",
+            "type": "timeseries"
         },
         {
             "datasource": {
@@ -2191,7 +2392,7 @@
                 "h": 9,
                 "w": 14,
                 "x": 0,
-                "y": 22
+                "y": 44
             },
             "id": 12,
             "options": {
@@ -2312,7 +2513,7 @@
                 "h": 9,
                 "w": 10,
                 "x": 14,
-                "y": 22
+                "y": 44
             },
             "id": 13,
             "options": {
@@ -2412,7 +2613,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 0,
-                "y": 31
+                "y": 53
             },
             "id": 22,
             "options": {
@@ -2512,7 +2713,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 12,
-                "y": 31
+                "y": 53
             },
             "id": 23,
             "options": {
@@ -2589,7 +2790,7 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 96
+                                "value": 58
                             }
                         ]
                     },
@@ -2644,10 +2845,10 @@
                 ]
             },
             "gridPos": {
-                "h": 8,
-                "w": 8,
+                "h": 10,
+                "w": 12,
                 "x": 0,
-                "y": 39
+                "y": 61
             },
             "id": 24,
             "options": {
@@ -2720,6 +2921,106 @@
             "fieldConfig": {
                 "defaults": {
                     "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 12,
+                "x": 12,
+                "y": 61
+            },
+            "id": 31,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": false
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "editorMode": "code",
+                    "expr": "(\n  sum(rate(router_port_rx_sum[$increase_interval]) + rate(router_port_tx_sum[$increase_interval]))\n) /8",
+                    "instant": false,
+                    "legendFormat": "Router Throughput",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Router Throughput",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
                         "mode": "thresholds"
                     },
                     "custom": {
@@ -2760,9 +3061,9 @@
             },
             "gridPos": {
                 "h": 8,
-                "w": 16,
-                "x": 8,
-                "y": 39
+                "w": 24,
+                "x": 0,
+                "y": 71
             },
             "id": 25,
             "options": {
@@ -2871,6 +3172,6 @@
     "timezone": "browser",
     "title": "Router",
     "uid": "ddw9t1fudd88wb",
-    "version": 15,
+    "version": 2,
     "weekStart": ""
 }

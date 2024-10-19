@@ -199,14 +199,14 @@
                         "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
                     },
                     "editorMode": "code",
-                    "expr": "sum(increase(switch_port_tx_sum[$increase_interval]) + increase(switch_port_rx_sum[$increase_interval]))",
+                    "expr": "sum(rate(switch_port_tx_sum[$increase_interval]) + rate(switch_port_rx_sum[$increase_interval])) / 8",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
                     "refId": "A"
                 }
             ],
-            "title": "Bandwidth",
+            "title": "Throughput",
             "type": "stat"
         },
         {
@@ -2584,7 +2584,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"1\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"1\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"1\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"1\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"1\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"1\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -2666,7 +2666,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"3\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"3\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"3\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"3\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"3\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"3\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -2748,7 +2748,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"5\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"5\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"5\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"5\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"5\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"5\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -2830,7 +2830,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"7\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"7\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"7\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"7\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"7\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"7\", linkSpeed!=\"Down\"} == 1)\n)",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -2912,7 +2912,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"9\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"9\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"9\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"9\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"9\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"9\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -2994,7 +2994,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"11\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"11\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"11\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"11\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"11\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"11\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -3076,7 +3076,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"13\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"13\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"13\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"13\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"13\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"13\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -3158,7 +3158,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"15\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"15\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"15\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"15\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"15\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"15\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -3240,7 +3240,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"2\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"2\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"2\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"2\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"2\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"2\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -3322,7 +3322,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"4\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"4\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"4\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"4\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"4\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"4\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -3404,7 +3404,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"6\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"6\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"6\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"6\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"6\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"6\", linkSpeed!=\"Down\"} == 1)\n)",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -3486,7 +3486,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"8\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"8\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"8\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"8\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"8\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"8\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -3568,7 +3568,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"10\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"10\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"10\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"10\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"10\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"10\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -3650,7 +3650,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"12\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"12\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"12\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"12\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"12\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"12\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -3732,7 +3732,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"14\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"14\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"14\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"14\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"14\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"14\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -3814,7 +3814,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"16\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"16\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"16\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"16\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"16\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"16\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -3854,7 +3854,8 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "blue"
+                                "color": "blue",
+                                "value": null
                             }
                         ]
                     },
@@ -3895,7 +3896,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"17\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"17\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"17\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"17\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"17\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"17\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -3935,7 +3936,8 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "blue"
+                                "color": "blue",
+                                "value": null
                             }
                         ]
                     },
@@ -3976,7 +3978,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (increase(switch_port_tx_sum{port=\"18\"}[$increase_interval]) + increase(switch_port_rx_sum{port=\"18\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"18\", linkSpeed!=\"Down\"} == 1)\n)",
+                    "expr": "(\n  (rate(switch_port_tx_sum{port=\"18\"}[$increase_interval]) + rate(switch_port_rx_sum{port=\"18\"}[$increase_interval]))\n  * on (port) group_left()\n  (switch_port_info{port=\"18\", linkSpeed!=\"Down\"} == 1)\n) /8",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -4036,7 +4038,210 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green"
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 24,
+                "x": 0,
+                "y": 27
+            },
+            "id": 44,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "editorMode": "code",
+                    "expr": "(\n  (rate(switch_port_tx_sum[$increase_interval]))\n  * on (port) group_left(portName)\n  (switch_port_info{linkSpeed!=\"Down\"} == 1)\n) / 8",
+                    "instant": false,
+                    "legendFormat": "{{portName}} port: {{port}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Switch port TX",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 24,
+                "x": 0,
+                "y": 36
+            },
+            "id": 45,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "editorMode": "code",
+                    "expr": "(\n  (rate(switch_port_rx_sum[$increase_interval]))\n  * on (port) group_left(portName)\n  (switch_port_info{linkSpeed!=\"Down\"} == 1)\n) / 8",
+                    "instant": false,
+                    "legendFormat": "{{portName}} port: {{port}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Switch port RX",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
                             },
                             {
                                 "color": "red",
@@ -4052,7 +4257,7 @@
                 "h": 10,
                 "w": 24,
                 "x": 0,
-                "y": 27
+                "y": 45
             },
             "id": 2,
             "options": {
@@ -4134,7 +4339,8 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green"
+                                "color": "green",
+                                "value": null
                             },
                             {
                                 "color": "red",
@@ -4207,10 +4413,10 @@
                 ]
             },
             "gridPos": {
-                "h": 8,
-                "w": 14,
+                "h": 9,
+                "w": 12,
                 "x": 0,
-                "y": 37
+                "y": 55
             },
             "id": 22,
             "options": {
@@ -4278,8 +4484,110 @@
                 }
             ],
             "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 12,
+                "x": 12,
+                "y": 55
+            },
+            "id": 46,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": false
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS_INFRASTRUCTURE}"
+                    },
+                    "editorMode": "code",
+                    "expr": "sum(rate(switch_port_tx_sum[$increase_interval]) + rate(switch_port_rx_sum[$increase_interval])) / 8",
+                    "instant": false,
+                    "legendFormat": "Switch Throughput",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Switch Throughput",
+            "type": "timeseries"
         }
     ],
+    "refresh": "",
     "schemaVersion": 39,
     "tags": [
         "Omada"
@@ -4315,6 +4623,6 @@
     "timezone": "browser",
     "title": "Switch",
     "uid": "advqgazfw4xs0c",
-    "version": 18,
+    "version": 2,
     "weekStart": ""
 }
