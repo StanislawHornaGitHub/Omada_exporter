@@ -45,7 +45,8 @@ Dashboards are available for import [here](/Grafana/Dashboards/)
 3. Start docker compose using `docker compose up -d`
 4. Metrics will be available at `http://<your_hostname>:51772/metrics`
 
-> [!IMPORTANT] > `.env` file filled with data from table should be saved in `./app` directory before building docker image.
+> [!IMPORTANT]
+> > `.env` file filled with data from table should be saved in `./app` directory before building docker image.
 
 ### Parameters
 
